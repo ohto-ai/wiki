@@ -565,21 +565,6 @@ pre {
 .post-content >table th {
   font-weight: 600;
 }
-.post-content kbd {
-  display: inline-block;
-  padding: 3px 5px;
-  font-size: 11px;
-  line-height: 10px;
-  color: #444d56;
-  vertical-align: middle;
-  background-color: #fafbfc;
-  border: solid 1px #c6cbd1;
-  border-bottom-color: #959da5;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  box-shadow: inset 0 -1px 0 #959da5;
-}
 .footer {
   position: relative;
   padding-top: 40px;
@@ -646,16 +631,6 @@ pre {
     left: 0;
     font-size: 37px;
   }
-}
-.footer-pageview {
-  text-align: center;
-  margin-top: 20px;
-  overflow: hidden;
-}
-.footer-pageview img {
-  display: inline-block;
-/* crop img to hide flag counter logo */
-  margin-bottom: -25px;
 }
 @media (max-width: 414px) {
   .calendar-container {
@@ -748,12 +723,6 @@ pre {
   stroke-width: 1px;
   stroke: #000;
   shape-rendering: crispEdges;
-}
-.category-list-count:before {
-  content: ' ';
-}
-.category-list-count:after {
-  content: ' ';
 }
 .blog-intro {
   width: 25%;
@@ -1008,26 +977,9 @@ pre {
     margin: 0;
     padding: 14px;
     border-top: 1px solid #d1d5da;
-    padding: 0;
   }
   .recent-post-item:first-child {
     border-top: none;
-  }
-  .recent-post-item .clearfix {
-    width: 100%;
-  }
-  .recent-post-item .post-title {
-    position: relative;
-  }
-  .recent-post-item .post-title i {
-    position: absolute;
-    top: 20px;
-    left: 14px;
-  }
-  .recent-post-item .post-title a {
-    display: block;
-    padding: 14px;
-    padding-left: 32px;
   }
 }
 .recent-post-item:nth-child(odd) {
@@ -1073,9 +1025,6 @@ pre {
 }
 .post-info span {
   margin-right: 16px;
-}
-.post-info a.category-link {
-  color: inherit;
 }
 .archive-list {
   list-style: none;
