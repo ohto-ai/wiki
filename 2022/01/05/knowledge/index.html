@@ -20,6 +20,9 @@
 
   <meta http-equiv="Cache-Control" content="no-transform"/>
   <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
 
   <link rel="icon" type="image/x-icon" href="https://ohtoai.top/favicon.ico">
   <link rel="stylesheet" href="/css/main.css">
@@ -29,6 +32,8 @@
 
   
 
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 <meta name="generator" content="Hexo 6.0.0"></head>
 
 <body id="replica-app">
@@ -58,7 +63,7 @@
         <li><a href="/">Tags</a></li>
         
         
-        <li><a href="/atom.xml" target="_blank">RSS</a></li>
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
         
       </ul>
 
@@ -125,9 +130,11 @@
     <i class="fa fa-user-o"></i>
     OhtoAi
 
-    <span class="post-date float-right" title="Jan 05, 2022, 3:37:33 PM">
-      <i class="fa fa-pencil-square-o"></i>
-      {{moment("20220105", YYYYMMDD).fromNow()}}
+    <span class="post-date float-right" title="{{moment(1641368253000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      
+          <i class="fa fa-pencil-square-o"></i>
+      
+      {{moment(1641368253000).fromNow()}}
     </span>
   </h3>
 
@@ -258,6 +265,8 @@
 </div>
 
 
+    
+
 
 
 
@@ -265,11 +274,12 @@
 
 <div class="footer-wrapper container">
   <footer class="footer clearfix">
+    <div class="clearfix">
     <a href="http://blog.ohtoai.top" class="footer-logo">
       <i class="fa fa-github"></i>
     </a>
     <ul class="footer-social-link">
-      <li>© 2016 OhtoAi</li>
+      <li>© 2019 OhtoAi</li>
       <li><a href="http://blog.ohtoai.top">Home</a></li>
       
       <li><a target="_blank" rel="noopener" href="https://github.com/Ohto-Ai">Github</a></li>
@@ -279,14 +289,14 @@
       Theme <a target="_blank" rel="noopener" href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
       by <a target="_blank" rel="noopener" href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
     </div>
+    </div>
+    
   </footer>
 </div>
 
 
 
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 <script src="/js/main.js"></script>
 
 </body>
