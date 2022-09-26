@@ -6,4 +6,4 @@ comments: true
 ---
 # 异世界
 
-![Ohto Ai](https://ohtoai.top/assets/img/ohtoai-background.jpg)
+<img alt="Ohto Ai" id="coverimg" style="border-radius:10px; width:90%; box-shadow: 0px 0px 10px rgb(82 82 82);" src="https://ohtoai.top/assets/img/ohtoai-background.jpg">
