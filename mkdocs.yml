@@ -25,11 +25,10 @@ theme:
     logo: logo
 
   features:
-    - header.autohide
     - navigation.instant
     - navigation.tracking
     - navigation.tabs
-    - navigation.tabs.sticky
+    # - navigation.tabs.sticky
     - navigation.sections
     - navigation.expand
     - navigation.indexes 
@@ -40,6 +39,8 @@ theme:
     - search.suggest
     - search.highlight
     - search.share
+    - header.autohide
+    - announce.dismiss
 
   palette:
     # Palette toggle for light mode
@@ -86,3 +87,17 @@ extra:
 copyright: >
   Copyright &copy; 2022 <a href="https://ohtoai.top/">Ohto-Ai</a> –
   <a href="#__consent">Change cookie settings</a>
+
+nav:
+  - 主站:
+    - http://ohtoai.top/
+  - Blog:
+    - index.md
+  - C++:
+    - C++/mt19937.md
+    - C++/open_mp.md
+  - Tool:
+    - Regex:
+      - regex/learn-regex.md
+  - About:
+    - about.md
