@@ -42,26 +42,21 @@ theme:
     - search.share
 
   palette:
-
-    # Palette toggle for automatic mode
-    - media: "(prefers-color-scheme)"
-      toggle:
-        icon: material/brightness-auto
-        name: 却换到深色模式
-
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default 
+      primary: white
       toggle:
         icon: material/weather-sunny
-        name: 切换到浅色模式
+        name: 切换到深色模式
 
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
+      primary: black
       toggle:
         icon: material/weather-night
-        name: 跟随系统
+        name: 切换到浅色模式
 plugins:
   - search:
       lang: 
