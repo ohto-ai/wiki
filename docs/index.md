@@ -1,17 +1,35 @@
-# Welcome to MkDocs
+---
+hide:
+  - navigation
+  - toc
+comments: true
+---
+# Welcome
+## Hi there, I'm [Ohto-Ai](https://ohtoai.top)👋
+![Write Every Read Nowhere][github-sub-title:img]
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+### Self Introduction
+- 🇨🇳 Chinese
+- 🧑🏻‍💻 &nbsp;Programmer
+- ⚡ C/C++
+- 💼 IOT
 
-## Commands
+### Github Stats
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+![github-stats][github-stats:img]  
+![Ohto-Ai's GitHub stats][github-lang:img]  
 
-## Project layout
+### Github Contribution
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+![Ohto-Ai's GitHub Activity Graph][github-activity-graph:img]  
+![snake](https://raw.githubusercontent.com/Ohto-Ai/Ohto-Ai/master/assets/github-contribution-grid-snake.svg)
+
+![Visitors][github-vistors:badge]
+![Last Commit][github-last-commit:badge]
+
+[github-sub-title:img]: https://readme-typing-svg.herokuapp.com?font=Segoe+Script&center=true&lines=Write+Everywhere%2C+Read+Nowhere.
+[github-stats:img]: https://github-readme-stats.vercel.app/api?username=Ohto-Ai&show_icons=true&theme=highcontrast&count_private=true&include_all_commits=true
+[github-lang:img]: https://github-readme-stats.vercel.app/api/top-langs/?username=Ohto-Ai&layout=compact&theme=highcontrast
+[github-activity-graph:img]: https://activity-graph.herokuapp.com/graph?username=Ohto-Ai&theme=xcode
+[github-vistors:badge]: https://komarev.com/ghpvc/?username=Ohto-Ai&style=flat&labelColor=black&logo=github&label=PROFILE+VIEWS&color=29bf12
+[github-last-commit:badge]: https://img.shields.io/github/last-commit/Ohto-Ai/Ohto-Ai?logo=markdown&label=LAST+UPDATE&color=29bf12&style=flat
