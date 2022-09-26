@@ -5,8 +5,11 @@ hide:
 comments: true
 ---
 # About
+[View On Github](//github.com/Ohto-Ai){ .md-button .md-button--primary }
+
 ## Hi there, I'm [Ohto-Ai](https://ohtoai.top)👋
 ![Write Every Read Nowhere][github-sub-title:img]
+
 
 ### Self Introduction
 - 🇨🇳 Chinese
