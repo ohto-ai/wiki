@@ -9,8 +9,8 @@
     height: 96px;
 }
 .avatar-container img{
-    border-radius:50%;
-    width:64px;
+    border-radius: 50%;
+    width: 64px;
     box-shadow: 0px 0px 10px rgb(82 82 82);
 }
 .avatar-container img:hover
@@ -28,4 +28,7 @@
 }
 .avatar-attr-trans-ani img{
     transition: opacity 0.5s ease-in, width 0.2s, transform 2s ease-out;
+}
+.avatar-attr-no-border-radius img{
+    border-radius: 0;
 }
