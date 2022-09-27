@@ -33,7 +33,7 @@ comments: true
   <figure markdown>
     <a href="https://zhouhuan1004.gitee.io" target="_blank">
       <div class="avatar-wrapper avatar-attr-rotate-hover">
-        <img alt="jnchou" loading="lazy" title="jnchou" src='//raw.githubusercontent.com/zhouhuan666/BlogAssets/0.11/SettingPic/avatar.JPG'>
+        <img alt="jnchou" loading="lazy" title="jnchou" src='../assets/img/social/jnchou.png'>
       </div>
       <figcaption>jnchou</figcaption>
     </a>
