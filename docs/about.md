@@ -7,6 +7,8 @@ comments: true
 # About
 [View On Github](//github.com/Ohto-Ai){ .md-button .md-button--primary }
 
+<img src='//cdn.sep.cc/avatar/abe3aff418f55987552d933a287425af?d=mm&s=200' style='border-radius:50%; box-shadow: 0px 0px 10px rgb(82 82 82)'>  
+
 ## Hi there, I'm [Ohto-Ai](https://ohtoai.top)👋
 ![Write Every Read Nowhere][github-sub-title:img]
 
