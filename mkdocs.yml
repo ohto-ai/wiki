@@ -124,6 +124,10 @@ nav:
   - C++:
     - C++/mt19937.md
     - C++/open_mp.md
+    - C++/other-cpp-tips.md
+    - C++/branfuck.md
+    - C++/gray-code.md
+    - C++/Fowler-Noll-Vo-1a.md
   - Tool:
     - Regex: 
       - regex/learn-regex.md
