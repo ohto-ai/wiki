@@ -48,7 +48,6 @@ theme:
     - toc.follow
     # - toc.integrate 
     - navigation.top
-    # - announce.dismiss
     - search.suggest
     - search.highlight
     - search.share
