@@ -53,7 +53,6 @@ theme:
     - search.highlight
     - search.share
     - header.autohide
-    - announce.dismiss
     - content.code.annotate 
 
   palette:
@@ -98,6 +97,12 @@ extra:
       link: https://twitter.com/OhtoAi_OvO
     - icon: fontawesome/brands/steam 
       link: https://steamcommunity.com/id/OhtoAi-02/
+extra_css:
+  - extra/css/extra.css
+extra_javascript:
+  # - https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js
+  # - extra/js/extra.js
+
 copyright: >
   Copyright &copy; 2022 <a href="https://ohtoai.top/">Ohto-Ai</a> –
   <a href="#__consent">Change cookie settings</a>
