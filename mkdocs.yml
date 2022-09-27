@@ -115,16 +115,12 @@ markdown_extensions:
   - md_in_html
 nav:
   - 主站: http://ohtoai.top/
-  - Blog:
-    - index.md
+  - Blog: index.md
   - C++:
     - C++/mt19937.md
     - C++/open_mp.md
   - Tool:
-    - Regex:
-      - regex/learn-regex.md
-    - Git-Guide:
-      - git-guide/index.html
+    - Regex: regex/learn-regex.md
+    - Git-Guide: git-guide/index.html
   - 友链: friend.md
-  - About:
-    - about.md
+  - About: about.md
