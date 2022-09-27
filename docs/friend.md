@@ -6,7 +6,7 @@ comments: true
 ---
 # Link
 
-!!! info inline end
+???+ info
 
     请在评论区交换友链信息  
     格式：  
