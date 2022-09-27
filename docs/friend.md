@@ -13,7 +13,7 @@ comments: true
     ```
     [![Creeper Title](https://cree.per/creeper.png)](https://cree.per tip)
     ```
-<div class="avatar-container">
+<div class="avatar-container avatar-attr-opacity-low avatar-attr-trans-ani">
   <figure markdown>
     <a href="http://beiklive.top" target="_blank">
       <div class="avatar-wrapper">
@@ -28,6 +28,14 @@ comments: true
         <img alt="Ohto-Ai" loading="lazy" title="I am Ohto-Ai" src='//avatars.githubusercontent.com/Ohto-Ai?size=96'>
       </div>
       <figcaption>Ohto-Ai</figcaption>
+    </a>
+  </figure>
+  <figure markdown>
+    <a href="https://zhouhuan1004.gitee.io" target="_blank">
+      <div class="avatar-wrapper avatar-attr-rotate-hover">
+        <img alt="jnchou" loading="lazy" title="jnchou" src='//raw.githubusercontent.com/zhouhuan666/BlogAssets/0.11/SettingPic/avatar.JPG'>
+      </div>
+      <figcaption>jnchou</figcaption>
     </a>
   </figure>
 </div>
