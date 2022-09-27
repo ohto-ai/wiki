@@ -8,4 +8,4 @@ comments: true
 </style>
 
 > 内容需要从gist中加载，请耐心等待  
-<script src="https://gist.github.com/Ohto-Ai/008909fc338f1f81e54ac1319e8a7cd0.js"></script>
+<script src="https://gist.github.com/Ohto-Ai/f6bbf69ae3a45caf7add79756ccb1537.js"></script>
