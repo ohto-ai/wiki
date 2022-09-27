@@ -120,7 +120,9 @@ nav:
     - C++/mt19937.md
     - C++/open_mp.md
   - Tool:
-    - Regex: regex/learn-regex.md
-    - Git-Guide: git-guide/index.html
+    - Regex: 
+      - regex/learn-regex.md
+    - Git: 
+      - git-guide/index.html
   - 友链: friend.md
   - About: about.md
