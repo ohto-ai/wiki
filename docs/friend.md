@@ -13,7 +13,7 @@ comments: true
     ```
     [![Creeper Title](https://cree.per/creeper.png)](https://cree.per tip)
     ```
-<div class="avatar-container avatar-attr-opacity-low avatar-attr-trans-ani">
+<div class="avatar-container avatar-attr-opacity-low avatar-attr-trans-ani avatar-attr-64px">
   <figure markdown>
     <a href="http://beiklive.top" target="_blank">
       <div class="avatar-wrapper">
@@ -31,7 +31,7 @@ comments: true
     </a>
   </figure>
   <figure markdown>
-    <a href="https://zhouhuan666.github.io/" target="_blank">
+    <a href="https://zhouhuan666.github.io" target="_blank">
       <div class="avatar-wrapper avatar-attr-rotate-hover">
         <img alt="jnchou" loading="lazy" title="jnchou" src='../assets/img/social/jnchou.png'>
       </div>
