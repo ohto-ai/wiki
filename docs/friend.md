@@ -42,7 +42,7 @@ comments: true
   <figure markdown>
     <a href="https://ohto-ai.github.io/main" target="_blank">
       <div class="avatar-wrapper avatar-attr-rotate-hover avatar-attr-no-border-radius">
-        <img alt="thatboy" loading="lazy" title="jnchou" src='https://ohto-ai.github.io/main/favicon.ico'>
+        <img alt="thatboy" loading="lazy" title="thatboy" src='https://ohto-ai.github.io/main/favicon.ico'>
       </div>
       <figcaption>thatboy</figcaption>
     </a>
