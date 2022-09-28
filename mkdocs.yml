@@ -126,6 +126,7 @@ nav:
     - C++/open_mp.md
     - C++/branfuck.md
     - C++/gray-code.md
+    - C++/error-code.md
     - C++/Fowler-Noll-Vo-1a.md
   - Tool:
     - Regex: 
