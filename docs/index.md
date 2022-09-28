@@ -2,7 +2,7 @@
 hide:
   - navigation
   - toc
-comments: true
+comments: false
 ---
 # 异世界
 
