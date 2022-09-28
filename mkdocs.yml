@@ -122,6 +122,7 @@ nav:
   - Blog: index.md
   - C++:
     - C++/other-cpp-tips.md
+    - C++/rand-method.md
     - C++/mt19937.md
     - C++/open_mp.md
     - C++/branfuck.md
@@ -132,8 +133,8 @@ nav:
     - ow/kiriko-cg.md
   - Tool:
     - Regex: 
-      - regex/learn-regex.md
+      - tool/regex/learn-regex.md
     - Git: 
-      - git-guide/index.html
+      - tool/git/git-guide.md
   - 友链: friend.md
   - About: about.md
