@@ -99,6 +99,7 @@ extra:
 extra_css:
   - extra/css/extra.css
 extra_javascript:
+  - extra/js/increase_counter.js
   # - https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js
   # - extra/js/extra.js
 
