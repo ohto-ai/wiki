@@ -134,7 +134,7 @@ nav:
   - Overwatch:
     - ow/kiriko-cg.md
   - Github活动:
-    - gitstalk/beiklive.md
+    - https://gitstalk.netlify.app/beiklive
   - Tool:
     - Regex: 
       - tool/regex/learn-regex.md
