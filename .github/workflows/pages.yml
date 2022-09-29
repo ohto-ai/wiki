@@ -38,21 +38,6 @@ jobs:
         run:  /bin/bash scripts/dependence.install.sh
       - name: Setup Pages
         run: mkdocs build --clean
-      - name: Link Checker
-        id: lychee
-        uses: lycheeverse/lychee-action@v1.5.1
-        with:
-          args: --verbose --no-progress --base 'https://blog.ohtoai.top/' 'site/**/*.html'
-          output: ./lychee/out.md
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - name: Create Issue From File
-        if: steps.lychee.outputs.exit_code != 0
-        uses: peter-evans/create-issue-from-file@v4
-        with:
-          title: Link Checker Report
-          content-filepath: ./lychee/out.md
-          labels: report, automated issue
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
