@@ -133,6 +133,8 @@ nav:
       - C++/dump-traceback.md
   - Overwatch:
     - ow/kiriko-cg.md
+  - Github活动:
+    - gitstalk/beiklive.md
   - Tool:
     - Regex: 
       - tool/regex/learn-regex.md
