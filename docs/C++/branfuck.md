@@ -1,5 +1,6 @@
 ---
 comments: true
+tags: 算法, 模板
 ---
 # BRANFUCK的模板实现
 <style>
