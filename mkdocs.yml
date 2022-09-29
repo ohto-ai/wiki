@@ -132,16 +132,17 @@ nav:
     - cpp/fowler-noll-vo-1a.md
     - Debug:
       - cpp/dump-traceback.md
+  - Tool:
+    - Regex: 
+      - tool/regex/learn-regex.md
+    - Git: 
+      - tool/git/git-guide.md
   - Overwatch:
     - ow/kiriko-cg.md
   - Github活动: 
     - gitstalk/index.md
     - Ohto-Ai: https://gitstalk.netlify.app/Ohto-Ai
     - beiklive: https://gitstalk.netlify.app/beiklive
-  - Tool:
-    - Regex: 
-      - tool/regex/learn-regex.md
-    - Git: 
-      - tool/git/git-guide.md
+  - gitalk: gitalk/index.md
   - 友链: friend.md
   - About: about.md
