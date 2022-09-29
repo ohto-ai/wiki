@@ -42,7 +42,7 @@ jobs:
         id: lychee
         uses: lycheeverse/lychee-action@v1.5.1
         with:
-          args: --verbose --no-progress --base 'https://blog.ohtoai.top/' './**/*.md' './**/*.html'
+          args: --verbose --no-progress --base 'https://blog.ohtoai.top/' 'site/**/*.html'
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Create Issue From File
