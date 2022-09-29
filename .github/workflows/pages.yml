@@ -43,7 +43,7 @@ jobs:
         uses: lycheeverse/lychee-action@v1.5.1
         with:
           args: --verbose --no-progress --base 'https://blog.ohtoai.top/' 'site/**/*.html'
-          output: /tmp/lychee/out.md
+          output: ./lychee/out.md
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Create Issue From File
@@ -51,7 +51,7 @@ jobs:
         uses: peter-evans/create-issue-from-file@v4
         with:
           title: Link Checker Report
-          content-filepath: /tmp/lychee/out.md
+          content-filepath: ./lychee/out.md
           labels: report, automated issue
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
