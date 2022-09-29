@@ -123,13 +123,14 @@ nav:
   - C++:
     - C++/other-cpp-tips.md
     - C++/rand-method.md
-    - C++/dump-traceback.md
     - C++/mt19937.md
     - C++/open_mp.md
     - C++/branfuck.md
     - C++/gray-code.md
     - C++/error-code.md
     - C++/Fowler-Noll-Vo-1a.md
+    - Debug:
+      - C++/dump-traceback.md
   - Overwatch:
     - ow/kiriko-cg.md
   - Tool:
