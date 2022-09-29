@@ -1,5 +1,6 @@
 ---
 comments: true
+tags: 算法
 ---
 # Fowler-Noll-Vo-1a哈希算法
 <style>
