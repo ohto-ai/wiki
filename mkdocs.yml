@@ -133,9 +133,10 @@ nav:
       - C++/dump-traceback.md
   - Overwatch:
     - ow/kiriko-cg.md
-  - Github活动:
-    - https://gitstalk.netlify.app/Ohto-Ai
-    - https://gitstalk.netlify.app/beiklive
+  - Github活动: 
+    - gitstalk/index.md
+    - Ohto-Ai: https://gitstalk.netlify.app/Ohto-Ai
+    - beiklive: https://gitstalk.netlify.app/beiklive
   - Tool:
     - Regex: 
       - tool/regex/learn-regex.md
