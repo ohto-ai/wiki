@@ -122,16 +122,16 @@ nav:
   - 主站: http://ohtoai.top/
   - Blog: index.md
   - C++:
-    - C++/other-cpp-tips.md
-    - C++/rand-method.md
-    - C++/mt19937.md
-    - C++/open_mp.md
-    - C++/branfuck.md
-    - C++/gray-code.md
-    - C++/error-code.md
-    - C++/Fowler-Noll-Vo-1a.md
+    - cpp/other-cpp-tips.md
+    - cpp/rand-method.md
+    - cpp/mt19937.md
+    - cpp/open-mp.md
+    - cpp/branfuck.md
+    - cpp/gray-code.md
+    - cpp/error-code.md
+    - cpp/fowler-noll-vo-1a.md
     - Debug:
-      - C++/dump-traceback.md
+      - cpp/dump-traceback.md
   - Overwatch:
     - ow/kiriko-cg.md
   - Github活动: 
