@@ -1,5 +1,7 @@
 ---
 comments: true
+hide:
+  - toc
 ---
 # Github活动
 

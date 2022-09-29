@@ -2,6 +2,7 @@
 hide:
   - navigation
   - toc
+  - footer
 comments: false
 ---
 # 异世界

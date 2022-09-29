@@ -1,12 +1,9 @@
 ---
 comments: true
+hide:
+  - toc
 ---
 <style>
-/*** hide secondary sidbar ***/
-.md-sidebar--secondary:not([hidden]) {
-    display: none;
-}
-
 .read_pro {
     position: fixed;
     top: 0;
