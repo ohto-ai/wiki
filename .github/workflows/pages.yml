@@ -38,10 +38,6 @@ jobs:
         run:  /bin/bash scripts/dependence.install.sh
       - name: Setup Pages
         run: mkdocs build --clean
-      - name: Check HTML Links
-        uses: modernweb-dev/check-html-links-action@v1
-        with:
-          doc-folder: 'site/'
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
