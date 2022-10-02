@@ -1,5 +1,6 @@
 # 404 NOT FOUND
-![](https://cdn.sep.cc/avatar/02c55aff592f8a151ec83b3051892d2b)
+
+<img src='//cdn.sep.cc/avatar/02c55aff592f8a151ec83b3051892d2b' width=200 style='border-radius:50%; box-shadow: 0px 0px 10px rgb(82 82 82)'>  
 Hi, I am 在下洛零  
 地址：银河系 猎户臂 太阳系 地球 中国 江苏省 ❏❏市  
 真核总界 动物界 后生动物亚界 后口动物总门 脊索动物门 脊椎动物亚门 羊膜总纲   
