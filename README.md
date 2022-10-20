@@ -4,5 +4,5 @@
 Hi there, this is my blog site.  
 ALL of these content is FREE.
 
-site on myserver: https://blog.ohtoai.top/  
-site on github: https://ohto-ai.github.io/blog/
+site: https://blog.ohtoai.top/  
+mirror: https://ohto-ai.github.io/blog/
