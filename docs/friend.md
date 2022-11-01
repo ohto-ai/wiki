@@ -48,7 +48,7 @@ comments: true
     </a>
   </figure>
   <figure markdown>
-    <a href="https://ohto-ai.github.io/blog/others/zxll/" target="_blank">
+    <a href="../others/zxll/" target="_blank">
       <div class="avatar-wrapper avatar-attr-rotate-hover">
         <img alt="zxll" loading="lazy" title="ZXLL" src='//cdn.sep.cc/avatar/02c55aff592f8a151ec83b3051892d2b?s=96'>
       </div>
