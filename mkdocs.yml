@@ -121,8 +121,8 @@ markdown_extensions:
   - md_in_html
 nav:
   - 主站: http://ohtoai.top/#not-github-io-with-parent
-  - 主站: ../homepage/#only-github-io-with-parent
-  - Blog: /
+  - 主站: /homepage/#only-github-io-with-parent
+  - Blog: index.md
   - C++:
     - cpp/other-cpp-tips.md
     - cpp/rand-method.md
