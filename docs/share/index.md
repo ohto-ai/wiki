@@ -2,7 +2,7 @@
 comments: true
 tags: 网站, 工具, 分享
 ---
-# 神奇网站在哪里 :star2:
+# 神奇网站在哪里
 
 1. [Quick Reference](https://wangchujiang.com/reference/)
     > 为开发人员分享快速参考备忘清单【速查表】
