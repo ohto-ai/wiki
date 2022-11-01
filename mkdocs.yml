@@ -143,7 +143,7 @@ nav:
     - gitstalk/index.md
     - Ohto-Ai: https://gitstalk.netlify.app/Ohto-Ai
     - beiklive: https://gitstalk.netlify.app/beiklive
-  - gitalk: gitalk/index.md
+  - QuickReference: quick_reference
   - ZXLL: others/fr-my.md
   - 友链: friend.md
   - About: about.md
