@@ -4,6 +4,7 @@ tags: 网站, 工具, 分享
 ---
 # 神奇网站在哪里
 
+## 神奇
 |链接|简介|
 |:-------------------------:|:-------------------------------------|
 | [Quick Reference](https://wangchujiang.com/reference/) | 为开发人员分享快速参考备忘清单【速查表】 |
@@ -21,3 +22,11 @@ tags: 网站, 工具, 分享
 | [note](https://note.ms/) | 在线笔记 |
 | [Incredi Build](https://docs.incredibuild.cn/index.html) | 联合编译 |
 | [carbon](https://carbon.now.sh/) | 代码渲染 |
+| [readme.so](https://readme.so/) | 编写readme |
+| [zfile](https://github.com/zfile-dev/zfile) | 基于 Java 的在线网盘程序 |
+
+
+## 网站
+| 链接 | 简介 |
+|-----|------|
+| [ssh-welcome-funny-command](https://dmesg.app/ssh-welcome-funny-command.html) | 草泥马 SSH 登录信息、几个好玩的 Linux 命令 |
