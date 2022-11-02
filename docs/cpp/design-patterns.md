@@ -1,3 +1,9 @@
+---
+comments: true
+tags: 设计模式
+---
+# 设计模式
+
 ![](https://cloud.githubusercontent.com/assets/11269635/23065273/1b7e5938-f515-11e6-8dd3-d0d58de6bb9a.png)
 
 * * *
