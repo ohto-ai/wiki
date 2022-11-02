@@ -93,7 +93,7 @@ tags: 设计模式
 * [原型模式（Prototype）](#-prototype)
 * [单例模式（Singleton）](#-singleton)
 
-## 🏠简单工厂模式（Simple Factory）
+## <span id = "简单工厂模式simple-factory">🏠简单工厂模式（Simple Factory）</span>
 
 现实生活中的例子：
 
@@ -170,7 +170,7 @@ $door2 = DoorFactory::makeDoor(50, 100);
 
 当创建一个对象不仅仅是一些分配而且涉及一些逻辑时，将它放在专用工厂中而不是在任何地方重复相同的代码是有意义的。
 
-## 🏭工厂方法模式（Factory Method）
+## <span id = "工厂方法模式factory-method">🏭工厂方法模式（Factory Method）</span>
 
 现实生活中的例子：
 
@@ -263,7 +263,7 @@ $marketingManager->takeInterview(); // Output: Asking about community building.
 
 在类中有一些通用处理但在运行时动态决定所需的子类时很有用。换句话说，当客户端不知道它可能需要什么样的子类时。
 
-## 🔨抽象工厂模式（Abstract Factory）
+## <span id = "抽象工厂模式abstract-factory">🔨抽象工厂模式（Abstract Factory）</span>
 
 现实生活中的例子：
 
@@ -394,7 +394,7 @@ $expert->getDescription(); // Output: I can only fit iron doors
 
 当涉及到不那么简单的，存在相互依赖关系的创建逻辑时使用
 
-## 👷建造者模式
+## <span id = "建造者模式">👷建造者模式</span>
 
 现实生活中的例子：
 
@@ -505,7 +505,7 @@ $burger = (new BurgerBuilder(14))
 
 当一个对象可能存在几种类型并避免构造函数伸缩时使用。与工厂模式的主要区别在于：当创建是一步过程时，将使用工厂模式，而当创建是多步骤过程时，将使用建造者模式。
 
-## 🐑原型模式（Prototype）
+## <span id = "原型模式prototype">🐑原型模式（Prototype）</span>
 
 现实生活中的例子：
 
@@ -579,7 +579,7 @@ echo $cloned->getCategory(); // Mountain sheep
 
 当需要一个与现有对象类似的对象时，或者与克隆相比，创建的成本会很高。
 
-## 💍单例模式（Singleton）
+## <span id = "单例模式singleton">💍单例模式（Singleton）</span>
 
 现实生活中的例子：
 
@@ -657,7 +657,7 @@ var_dump($president1 === $president2); // true
 * [享元模式（Flyweight）](#-flyweight)
 * [代理模式（Proxy）](#-proxy)
 
-## 🔌适配器模式（Adapter）
+## <span id = "适配器模式adapter">🔌适配器模式（Adapter）</span>
 
 现实生活中的例子：
 
@@ -748,7 +748,7 @@ $hunter = new Hunter();
 $hunter->hunt($wildDogAdapter);
 ```
 
-## 🚡桥梁模式（Bridge）
+## <span id = "桥梁模式bridge">🚡桥梁模式（Bridge）</span>
 
 现实生活中的例子：
 
@@ -849,7 +849,7 @@ echo $about->getContent(); // "About page in Dark Black";
 echo $careers->getContent(); // "Careers page in Dark Black";
 ```
 
-## 🌿组合模式（Composite）
+## <span id = "组合模式composite">🌿组合模式（Composite）</span>
 
 现实生活中的例子：
 
@@ -984,7 +984,7 @@ $organization->addEmployee($jane);
 echo "Net salaries: " . $organization->getNetSalaries(); // Net Salaries: 27000
 ```
 
-## ☕装饰模式（Decorator）
+## <span id = "装饰模式decorator">☕装饰模式（Decorator）</span>
 
 现实生活中的例子：
 
@@ -1107,7 +1107,7 @@ echo $someCoffee->getCost(); // 20
 echo $someCoffee->getDescription(); // Simple Coffee, milk, whip, vanilla
 ```
 
-## 📦门面模式（Facade）
+## <span id = "门面模式facade">📦门面模式（Facade）</span>
 
 现实生活中的例子：
 
@@ -1202,7 +1202,7 @@ $computer->turnOn(); // Ouch! Beep beep! Loading.. Ready to be used!
 $computer->turnOff(); // Bup bup buzzz! Haah! Zzzzz
 ```
 
-## 🍃享元模式（Flyweight）
+## <span id = "享元模式flyweight">🍃享元模式（Flyweight）</span>
 
 现实生活中的例子：
 
@@ -1286,7 +1286,7 @@ $shop->serve();
 // Serving tea to table# 5
 ```
 
-## 🎱代理模式（Proxy）
+## <span id = "代理模式proxy">🎱代理模式（Proxy）</span>
 现实生活中的例子：
 
 > 你有没有用过门禁卡进门？打开该门有多种选择，即可以使用门禁卡或按下绕过安检的按钮打开。门的主要功能是打开，但在它上面添加了一个代理来添加一些功能。让我用下面的代码示例更好地解释它。
@@ -1390,7 +1390,7 @@ $door->close(); // Closing lab door
 * [状态模式（State）](#-state)
 * [模板方法模式（Template Method）](#-template-method)
 
-## 🔗责任链模式（Chain Of Responsibilities）
+## <span id = "责任链模式chain-of-responsibilities">🔗责任链模式（Chain Of Responsibilities）</span>
 
 现实生活中的例子：
 
@@ -1495,7 +1495,7 @@ $bank->pay(259);
 // Paid 259 using Bitcoin!
 ```
 
-## 👮命令行模式（Command）
+## <span id = "命令行模式command">👮命令行模式（Command）</span>
 
 现实生活中的例子：
 
@@ -1619,7 +1619,7 @@ $remote->submit($turnOff); // Darkness!
 
 命令模式还可用于实现基于事务的系统。当你一执行命令就持续维持命令历史记录的情况下。如果成功执行了最后一个命令，一切都很好，否则只需要遍历历史记录持续在已经执行过的命令上执行`undo`。
 
-## ➿迭代器模式（Iterator）
+## <span id = "迭代器模式iterator">➿迭代器模式（Iterator）</span>
 
 现实生活中的例子：
 
@@ -1730,7 +1730,7 @@ foreach($stationList as $station) {
 $stationList->removeStation(new RadioStation(89)); // Will remove station 89
 ```
 
-## 👽中介者模式（Mediator）
+## <span id = "中介者模式mediator">👽中介者模式（Mediator）</span>
 
 现实生活中的例子：
 
@@ -1808,7 +1808,7 @@ $jane->send('Hey!');
 // Feb 14, 10:58 [Jane]: Hey!
 ```
 
-## 💾备忘录模式（Memento）
+## <span id = "备忘录模式memento">💾备忘录模式（Memento）</span>
 
 现实生活中的例子：
 
@@ -1900,7 +1900,7 @@ $editor->restore($saved);
 $editor->getContent(); // This is the first sentence. This is second.
 ```
 
-## 😎观察者模式（Observer）
+## <span id = "观察者模式observer">😎观察者模式（Observer）</span>
 
 现实生活中的例子：
 
@@ -1997,7 +1997,7 @@ $jobPostings->addJob(new JobPost('Software Engineer'));
 // Hi Jane Doe! New job posted: Software Engineer
 ```
 
-## 🏃访问者模式（Visitor）
+## <span id = "访问者模式visitor">🏃访问者模式（Visitor）</span>
 
 现实生活中的例子：
 
@@ -2147,7 +2147,7 @@ $dolphin->accept($speak);  // Tuut tutt tuutt!
 $dolphin->accept($jump);   // Walked on water a little and disappeared
 ```
 
-## 💡策略模式（Strategy）
+## <span id = "策略模式strategy">💡策略模式（Strategy）</span>
 
 现实生活中的例子：
 
@@ -2226,7 +2226,7 @@ $sorter = new Sorter(new QuickSortStrategy());
 $sorter->sort($dataset); // Output : Sorting using quick sort
 ```
 
-## 💢状态模式（State）
+## <span id = "状态模式state">💢状态模式（State）</span>
 
 现实生活中的例子：
 
@@ -2326,7 +2326,7 @@ $editor->type('Fifth line');
 // fifth line
 ```
 
-## 📒模板方法模式（Template Method）
+## <span id = "模板方法模式template-method">📒模板方法模式（Template Method）</span>
 
 现实生活中的例子：
 
