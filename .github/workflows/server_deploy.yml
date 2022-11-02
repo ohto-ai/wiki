@@ -1,0 +1,45 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Server
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["master"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "server"
+  cancel-in-progress: true
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy
+        uses: cross-the-world/ssh-pipeline@master
+        env:
+          TARGET: "/var/deploy/blog/"
+          BRANCH: "master"
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          user: ${{ secrets.DEPLOY_USERNAME }}
+          pass: ${{ secrets.DEPLOY_PASSWORD }}
+          connect_timeout: 10s
+          script: |
+            mkdir -p $TARGET
+            cd $TARGET
+            git init
+            git config --local http.sslVerify false
+            if [ -z "`git remote show`" ]; then git remote add origin https://github.com/${{github.repository}}; else git remote set-url origin https://github.com/${{github.repository}}; fi
+            git pull origin $BRANCH --force --prune
+            mkdocs build --clean
