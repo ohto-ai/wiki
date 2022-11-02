@@ -39,7 +39,6 @@ jobs:
             mkdir -p $TARGET
             cd $TARGET
             git init
-            git config --local http.sslVerify false
             if [ -z "`git remote show`" ]; then git remote add origin https://github.com/${{github.repository}}; else git remote set-url origin https://github.com/${{github.repository}}; fi
             git pull origin $BRANCH --force --prune
             mkdocs build --clean
