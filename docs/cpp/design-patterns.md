@@ -14,9 +14,8 @@ tags: 设计模式
 
 ----------  
 
-**目录**
-
-<!-- TOC updateOnSave:false -->
+<details>
+  <summary><em>目录<em></summary>
 
 - [介绍](#介绍)
     - [注意](#注意)
@@ -51,7 +50,7 @@ tags: 设计模式
 - [贡献](#贡献)
 - [License](#license)
 
-<!-- /TOC -->
+</details>
 
 ## <span id = "介绍">介绍</span>
 
