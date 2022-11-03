@@ -14,8 +14,7 @@ tags: 设计模式
 
 ----------  
 
-<details>
-  <summary><em>目录<em></summary>
+**目录**
 
 - [介绍](#介绍)
     - [注意](#注意)
@@ -49,8 +48,6 @@ tags: 设计模式
 - [总结](#总结)
 - [贡献](#贡献)
 - [License](#license)
-
-</details>
 
 ## <span id = "介绍">介绍</span>
 
