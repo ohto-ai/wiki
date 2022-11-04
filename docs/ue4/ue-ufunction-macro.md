@@ -4,7 +4,7 @@ tag: UE4, 宏, UFUNCTION
 ---
 
 
-# UE4 UFUNCTION的meta信息
+# UE4 UFUNCTION常用的的元信息宏
 
 参考原文： [UE4-常见的宏-UFUNCTION](https://blog.csdn.net/wmy19890322/article/details/125598935)
 
