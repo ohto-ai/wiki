@@ -145,8 +145,6 @@ nav:
       - gitstalk/index.md
       - Ohto-Ai: https://gitstalk.netlify.app/Ohto-Ai
       - beiklive: https://gitstalk.netlify.app/beiklive
-  - Overwatch:
-    - ow/kiriko-cg.md
   - 分享: share/index.md
   - 友链: friend.md
   - About: about.md
