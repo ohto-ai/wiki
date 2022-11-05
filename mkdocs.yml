@@ -119,6 +119,11 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.superfences
   - md_in_html
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
 nav:
   - 主站: http://ohtoai.top/
   - Blog: index.md

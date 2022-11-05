@@ -4,7 +4,7 @@ comments: true
 <p align="center">
     <br/>
     <a href="https://github.com/ziishaned/learn-regex">
-        <img src="https://assets.ohtoai.top/img/ohtoai/learn-regex.png" alt="Learn Regex">
+        <img src="../img/learn-regex.png" alt="Learn Regex">
     </a>
     <br /><br />
     <p>

@@ -1,35 +1,62 @@
-.avatar-container{
+.avatar-container {
     display: flex;
 }
-.avatar-wrapper{
+
+.avatar-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 96px;
     height: 96px;
 }
-.avatar-container img{
+
+.avatar-container img {
     border-radius: 50%;
 }
-.avatar-container img:hover
-{
-    width:96px;
+
+.avatar-container img:hover {
+    width: 96px;
     opacity: 1;
 }
 
 /** attr **/
-.avatar-attr-64px img{
+.avatar-attr-64px img {
     width: 64px;
 }
-.avatar-attr-opacity-low img{
+
+.avatar-attr-opacity-low img {
     opacity: 0.3;
 }
-.avatar-attr-rotate-hover img:hover{
+
+.avatar-attr-rotate-hover img:hover {
     transform: rotate(360deg);
 }
-.avatar-attr-trans-ani img{
+
+.avatar-attr-trans-ani img {
     transition: opacity 0.5s ease-in, width 0.2s, transform 2s ease-out;
 }
-.avatar-attr-no-border-radius img{
+
+.avatar-attr-no-border-radius img {
     border-radius: 0;
+}
+
+@keyframes heart {
+    0%,
+    40%,
+    80%,
+    100% {
+        transform: scale(1);
+    }
+
+    20%,
+    60% {
+        transform: scale(1.15);
+    }
+}
+
+.heart {
+    animation: heart 1000ms infinite;
+}
+.twitter {
+    color: #1DA1F2;
 }

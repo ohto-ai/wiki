@@ -6,13 +6,13 @@ hide:
 comments: true
 ---
 # About
-[View On Github](//github.com/Ohto-Ai){ .md-button .md-button--primary }
+[View On Github :fontawesome-brands-github:{.heart}](//github.com/Ohto-Ai){ .md-button .md-button--primary }
 
 <img src='//avatars.githubusercontent.com/Ohto-Ai?size=200' width=200 style='border-radius:50%; box-shadow: 0px 0px 10px rgb(82 82 82)'>  
 
 ## Hi there, I'm [Ohto-Ai](https://ohtoai.top)👋
-![Write Every Read Nowhere][github-sub-title:img]
 
+![Write Everywhere Read Nowhere][github-sub-title:img]  
 
 ### Self Introduction
 - 🇨🇳 Chinese
@@ -22,8 +22,8 @@ comments: true
 
 ### Github Stats
 
-![github-stats][github-stats:img]  
-![Ohto-Ai's GitHub stats][github-lang:img]  
+|![github-stats][github-stats:img]|![github-lang][github-lang:img]|
+|---------------------------------|------------------------------------------|
 
 ### Github Contribution
 
