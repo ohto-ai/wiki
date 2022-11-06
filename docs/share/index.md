@@ -24,6 +24,7 @@ tags: 网站, 工具, 分享
 | [carbon](https://carbon.now.sh/) | 代码渲染 |
 | [readme.so](https://readme.so/) | 编写readme |
 | [zfile](https://github.com/zfile-dev/zfile) | 基于 Java 的在线网盘程序 |
+| [lolcat](https://github.com/busyloop/lolcat) | 彩虹色的lolcat |
 
 
 ## 网站
