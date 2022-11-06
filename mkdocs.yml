@@ -151,7 +151,8 @@ nav:
       - Ohto-Ai: https://gitstalk.netlify.app/Ohto-Ai
       - beiklive: https://gitstalk.netlify.app/beiklive
   - 分享:
-    - share/index.md
+    - share/
+  - Monitor: uptime-status/
   - 友链: friend.md
   - 关于: about.md
   - 开往: https://travellings.link

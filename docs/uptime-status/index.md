@@ -1,9 +1,10 @@
 ---
 comments: true
 hide:
+  - navigation
   - toc
 ---
-# Git Guide
+# Monitor
 
 <style>
 .read_pro {
@@ -26,8 +27,7 @@ hide:
 <div class="read_pro">
     <div class="read_pro_inner" id="read_pro_inner"></div>
 </div>
-[阅读原文](../git_guide/)  
-<iframe id='inner-html' style='width:100%' src="../git_guide/" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+<iframe id='inner-html' style='width:100%' src="monitor" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 <script>
     // expand content
     $(document).ready(function(){
