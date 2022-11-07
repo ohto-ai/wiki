@@ -66,7 +66,7 @@
   color: #999;
 }
 .photo>span:last-child::before{
-  content: '\4e0a\50b3\65bc';
+  content: 'Uploaded';
   margin-right: 0.25rem;
 }
 .title{
