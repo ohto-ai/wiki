@@ -36,12 +36,14 @@ Cosalbum = function Cosalbum() {
       $title.className = 'title';
       $cover.appendChild($title);
       $cover.className = 'cover';
-      $cover.style.cssText = `background: url(${cosAlbum.xmlLink}/${titleContent}/index.jpg);`;
+      $cover.style.cssText = `background: url(${cosAlbum.xmlLink}/${titleContent}/cover.jpg);`;
       $photoBox.appendChild($cover);
       $photoBox.className = 'photoBox';
       $cosAlbumEle.appendChild($photoBox);
-      for (let j = 1; j < content[i].length && j <= cosAlbum.viewNum; j++) {
+      for (let j = 1, count = 0; j < content[i].length && count <= cosAlbum.viewNum; j++) {
         let url = content[i][j].url;
+        if (url.endsWith('cover.jpg'))
+          continue;
         let $photo = document.createElement('div');
         let $desc = document.createElement('span');
         let $upDate = document.createElement('span');
@@ -68,6 +70,7 @@ Cosalbum = function Cosalbum() {
         $photo.appendChild($desc);
         $photo.appendChild($upDate);
         $photoBox.appendChild($photo);
+        ++count;
       }
       //插入指定元素第一个子元素
       $insert.insertBefore($cosAlbumEle, $insert.firstChild);
@@ -174,6 +177,8 @@ Cosalbum = function Cosalbum() {
     $photoBox.removeChild(obj.parentNode);
     for (let i = num; i < contentX.length && i < num + cosAlbum.viewNum; i++) {
       let url = contentX[i].url;
+      if (url.endsWith('cover.jpg'))
+        continue;
       let $photo = document.createElement('div');
       let $desc = document.createElement('span');
       let $upDate = document.createElement('span');

@@ -21,7 +21,8 @@ comments: true
       'xmlLink': 'https://album-1255316209.cos.ap-shanghai.myqcloud.com',
       'prependTo': '.album-content',
       'viewNum': 8,
-      // 'copyUrl': 'http://album.ohtoai.top'
+      // 'copyUrl': '//album.ohtoai.top',
+      'copyUrl': '//album-1255316209.cos.ap-shanghai.myqcloud.com'
     });
   </script>
     
