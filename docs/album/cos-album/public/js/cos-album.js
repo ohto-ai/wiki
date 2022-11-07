@@ -265,7 +265,7 @@ Cosalbum = function Cosalbum() {
     if (interval >= 1) {
       return interval + " minutes ago";
     }
-    return "right now";
+    return "just now";
   };
   /**
    * 创建 Powered By cos-album
