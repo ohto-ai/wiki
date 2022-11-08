@@ -126,7 +126,7 @@ markdown_extensions:
 
 nav:
   - 主站: http://ohtoai.top/
-  - Blog: index.md
+  - 首页: index.md
   - C++:
     - cpp/design-patterns.md
     - cpp/other-cpp-tips.md
