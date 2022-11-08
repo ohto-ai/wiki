@@ -6,8 +6,7 @@
  * Author     : Lruihao http://lruihao.cn
  */
 
- Cosalbum = function Cosalbum() {
-
+CosAlbum = function CosAlbum() {
     /**
      * 渲染DOM
      * @param {String} cosAlbum.xmlLink 需要解析的騰訊云COS桶XML鏈接
@@ -17,23 +16,18 @@
      * @param {String} [option.videoType] 音/視頻類型
      * @param {Object} cosAlbum CosAlbum.prototype
      */
-    var _renderDom = function (cosAlbum) {
-        let album_tree = _getContent(cosAlbum, cosAlbum.xmlLink);
+    var render_dom = function (cosAlbum) {
+        let album_tree = get_cos_album(cosAlbum, cosAlbum.xmlLink);
         let $cosAlbumEle = document.createElement('div');
         let $insert = document.querySelector(cosAlbum.prependTo || 'body');
         $cosAlbumEle.className = 'cos-album';
 
 
-        let renderFold = function (cosAlbum, album) {
+        let render_fold = function (cosAlbum, album) {
             let $photoBox = document.createElement('div');
-            let $cover = document.createElement('div');
             let $title = document.createElement('div');
             $title.innerHTML = album.name;
             $title.className = 'title';
-            $cover.appendChild($title);
-            $cover.className = 'cover';
-            $cover.style.cssText = `background: url(${cosAlbum.xmlLink}/${album.cover.path});`;
-            $photoBox.appendChild($cover);
             $photoBox.className = 'photoBox';
             $cosAlbumEle.appendChild($photoBox);
 
@@ -49,44 +43,47 @@
                 $photo.className = 'photo';
                 if (cosAlbum.imgType.includes(child.type)) {
                     $media = document.createElement('img');
-                    $media.setAttribute('alt', content[i][j].url);
-                } else if (cosAlbum.videoType.includes(child.type)) {
+                    $media.setAttribute('alt', child.filename);
+                    $media.setAttribute('src', `${cosAlbum.xmlLink}/${child.path}`);
+                    $media.classList.add('photo-img');
+                    $photo.classList.add('photo-img-wrapper');
+                }
+                else if (cosAlbum.videoType.includes(child.type)) {
                     $media = document.createElement('video');
                     $media.setAttribute('controls', 'controls');
-                } else {
+                    $media.setAttribute('src', `${cosAlbum.xmlLink}/${child.path}`);
+                    $media.classList.add('photo-video');
+                    $photo.classList.add('photo-video-wrapper');
+                }
+                else if (child.fold) {
+                    $media = document.createElement('img');
+                    $media.setAttribute('alt', child.name);
+                    $media.setAttribute('src', `${cosAlbum.xmlLink}/${child.cover.path}`);
+                    $media.classList.add('photo-album');
+                    $photo.classList.add('photo-album-wrapper');
                     // todo view album inner
+                }
+                else {
                     continue;
                 }
-                $media.setAttribute('src', `${cosAlbum.xmlLink}/${child.path}`);
-                $desc.innerHTML = $desc.title = child.filename;
-                $upDate.innerHTML = _timeSince(child.date);
+                $upDate.innerHTML = timeSince(child.date);
                 $upDate.title = child.date;
+                $upDate.classList.add('upload-desc')
+                $media.setAttribute('loading', 'lazy');
+                $desc.innerHTML = $desc.title = child.filename;
                 $photo.appendChild($media);
                 $photo.appendChild($desc);
-                $photo.appendChild($upDate);
+                child.date && $photo.appendChild($upDate);
                 $photoBox.appendChild($photo);
                 ++count;
-                // todo 渲染子目录的操作
             }
 
             //插入指定元素第一个子元素
             $insert.insertBefore($cosAlbumEle, $insert.firstChild);
-            // if (album.children.length > cosAlbum.viewNum) {
-            //     let $moreItem = document.createElement('div');
-            //     let $btnMore = document.createElement('button');
-            //     $moreItem.className = 'more';
-            //     $btnMore.className = 'btn-more';
-            //     $btnMore.innerHTML = 'More';
-            //     $btnMore.addEventListener('click', function () {
-            //         _moreClick(this, album, cosAlbum);
-            //     });
-            //     $moreItem.appendChild($btnMore);
-            //     $photoBox.appendChild($moreItem);
-            // }
         }
 
         album_tree.children.forEach(album => {
-            renderFold(cosAlbum, album);
+            render_fold(cosAlbum, album);
         });
     };
 
@@ -149,17 +146,20 @@
             const date = dates[index];
             const size = sizes[index];
 
+            [, ext] = get_filename_and_ext(path);
+            if (!cosAlbum.imgType.includes(ext) && !cosAlbum.videoType.includes(ext))
+                continue;
             if (path.endsWith('/'))
                 continue;
+            if (cosAlbum.album_regex != '' && !RegExp(cosAlbum.album_regex).test(path))
+                continue;
+
             let node_ptr = tree;
-            let node_path = '';
             let node_arr = path.split('/').filter(item => item.trim() != '');
 
             // process fold
             for (let node_index = 0; node_index < node_arr.length - 1; node_index++) {
                 const node_name = node_arr[node_index];
-                node_path += node_name + '/';
-
                 let ptr = node_ptr.get_child(node_name);
                 if (ptr != null) {
                     node_ptr = ptr;
@@ -203,24 +203,11 @@
      * @param {Object} cosAlbum CosAlbum.prototype
      * @return {Object} album_tree 包含名稱和日期、大小的相册树
      */
-    var _getContent = function (cosAlbum, xmlLink) {
-        cosAlbum.xmlDoc = _loadXMLDoc(xmlLink);
+    var get_cos_album = function (cosAlbum, xmlLink) {
+        cosAlbum.xmlDoc = load_xml_doc(xmlLink);
         let urls = Array.from(cosAlbum.xmlDoc.querySelectorAll('Key')).map(ele => { return ele.innerHTML; });
         let dates = Array.from(cosAlbum.xmlDoc.querySelectorAll('LastModified')).map(ele => { return ele.innerHTML.slice(0, 19).replace(/T/g, ' '); });
         let sizes = Array.from(cosAlbum.xmlDoc.querySelectorAll('Size')).map(ele => { return parseInt(ele.innerHTML); });
-
-        for (let index = 0; index < urls.length;) {
-            const path = urls[index];
-            if (path.endsWith('/') || (cosAlbum.album_regex != '' && !RegExp(cosAlbum.album_regex).test(path))) {
-                urls.splice(index, 1);
-                dates.splice(index, 1);
-                sizes.splice(index, 1);
-            }
-            else {
-                index++;
-            }
-        }
-
         let album_tree = make_album_tree(cosAlbum, urls, dates, sizes);
         return album_tree;
     };
@@ -229,7 +216,7 @@
      * @param {String} xmlLink 需要解析的騰訊云COS桶XML鏈接
      * @return {Object} xmlDoc XML文檔節點對象
      */
-    var _loadXMLDoc = function (xmlUrl) {
+    var load_xml_doc = function (xmlUrl) {
         let xmlDoc = {};
         try {
             //Internet Explorer
@@ -259,60 +246,12 @@
         return xmlDoc;
     };
     /**
-     * 獲取更多圖片
-     * @param {Object} obj button對象本身
-     * @param {Array} contentX 單個相冊的數組，相當於content[x]
-     * @param {Number} cosAlbum.viewNum 每個相冊顯示的照片數目,默認: 4
-     * @param {String} cosAlbum.xmlLink 需要解析的騰訊云 COS 桶 XML 鏈接
-     * @param {Object} cosAlbum CosAlbum.prototype
-     */
-    // var _moreClick = function (obj, contentX, cosAlbum) {
-    //     let $photoBox = obj.parentNode.parentNode;
-    //     let num = $photoBox.childNodes.length - 1;
-    //     let titleContent = contentX[0].url.slice(0, -1);
-    //     $photoBox.removeChild(obj.parentNode);
-    //     for (let i = num; i < contentX.length && i < num + cosAlbum.viewNum; i++) {
-    //         let url = contentX[i].url;
-    //         if (url.endsWith('cover.jpg'))
-    //             continue;
-    //         let $photo = document.createElement('div');
-    //         let $desc = document.createElement('span');
-    //         let $upDate = document.createElement('span');
-    //         let $media;
-    //         $photo.className = 'photo';
-    //         let contentDetail = url.split('.');
-    //         if (cosAlbum.imgType.includes(contentDetail[1])) {
-    //             $media = document.createElement('img');
-    //             $media.setAttribute('alt', url);
-    //         } else if (cosAlbum.videoType.includes(contentDetail[1])) {
-    //             $media = document.createElement('video');
-    //             $media.setAttribute('controls', 'controls');
-    //         } else {
-    //             continue;
-    //         }
-    //         $media.setAttribute('src', `${cosAlbum.xmlLink}/${titleContent}/${url}`);
-    //         if (cosAlbum.copyUrl) {
-    //             _addCopyListener($media, `${cosAlbum.copyUrl}/${titleContent}/${url}`, cosAlbum);
-    //         }
-    //         $desc.innerHTML = $desc.title = contentDetail[0];
-    //         $upDate.innerHTML = _timeSince(contentX[i].date);
-    //         $upDate.title = contentX[i].date;
-    //         $photo.appendChild($media);
-    //         $photo.appendChild($desc);
-    //         $photo.appendChild($upDate);
-    //         $photoBox.appendChild($photo);
-    //     }
-    //     if (contentX.length > num + cosAlbum.viewNum) {
-    //         $photoBox.appendChild(obj.parentNode);
-    //     }
-    // };
-    /**
      * 將時間字串轉換為時間差距字串，如：1小時之前、50秒之前等
      * @param {String} date 時間字串
      * @returns {String} 時間差距字串
      * @function
      */
-    var _timeSince = (date) => {
+    var timeSince = (date) => {
         if (!date) {
             return;
         }
@@ -347,13 +286,13 @@
      * 创建 Powered By cos-album
      * @param {String} version 版本号
      */
-    var _createPowerEle = (version) => {
+    var createPowerElement = (version) => {
         let $cosAlbumEle = document.querySelector('.cos-album');
         let $caPowerEle = document.createElement('div');
         let $caPowerLink = document.createElement('a');
-        $caPowerLink.href = 'https://github.com/Lruihao/cos-album';
+        $caPowerLink.href = 'https://github.com/Ohto-Ai';
         $caPowerLink.target = '_blank';
-        $caPowerLink.innerHTML = 'cos-album';
+        $caPowerLink.innerHTML = 'Ohto-Ai';
         $caPowerEle.className = 'capower';
         $caPowerEle.innerHTML = 'Powered By ';
         $caPowerEle.appendChild($caPowerLink);
@@ -387,9 +326,9 @@
      * @class Cosalbum
      * @author Lruihao http://lruihao.cn
      */
-    function Cosalbum(option) {
-        var _proto = Cosalbum.prototype;
-        this.version = '1.1.6';
+    function CosAlbum(option) {
+        var _proto = CosAlbum.prototype;
+        this.version = '1.0.0';
         this.option = option || {};
         this.xmlLink = this.option.xmlLink || '';
         this.album_regex = this.option.album_regex || '';
@@ -399,16 +338,8 @@
         this.imgType = _str2Array(this.option.imgType) || ['jpg', 'jpeg', 'png', 'gif', 'svg'];
         this.videoType = _str2Array(this.option.videoType) || ['mp4', 'mp3', 'avi', 'mov', 'qt'];
 
-        // for (let index = 0; index < this.album_paths.length; index++) {
-        //   path = this.album_paths[index];
-        //   if (path.endsWith('/'))
-        //   {
-        //     this.album_paths[index] = path.slice(0, -1);
-        //   }
-        // }
-
-        _renderDom(this);
-        _createPowerEle(this.version);
+        render_dom(this);
+        createPowerElement(this.version);
     }
-    return Cosalbum;
+    return CosAlbum;
 }();
