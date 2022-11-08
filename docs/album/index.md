@@ -22,7 +22,8 @@ comments: true
       'prependTo': '.album-content',
       'viewNum': 8,
       // 'copyUrl': '//album.ohtoai.top',
-      'copyUrl': '//album-1255316209.cos.ap-shanghai.myqcloud.com'
+      'copyUrl': '//album-1255316209.cos.ap-shanghai.myqcloud.com',
+      "album_regex": 'cloud/.*'
     });
   </script>
     

@@ -89,43 +89,118 @@ Cosalbum = function Cosalbum() {
     }
   };
   /**
+  * 生成文件夹结构
+  * @param {Array} urls 路径数组
+  * @param {Array} dates 时间数组
+  * @param {Array} sizes 大小数组
+  * @return {Object} tree 存储相册树形结构的对象
+  */
+  function make_album_tree(urls, dates, sizes) {
+    let tree = {};
+    for (let index = 0; index < urls.length; index++) {
+      const path = urls[index];
+      const date = dates[index];
+      const size = sizes[index];
+
+      if (path.endsWith('/'))
+        continue;
+      let node_ptr = tree;
+      let node_path = '';
+      let node_arr = path.split('/').filter(item => item.trim() != '');
+
+      // process fold
+      for (let node_index = 0; node_index < node_arr.length - 1; node_index++) {
+        const node = node_arr[node_index];
+
+        let parent_path = node_path;
+        node_path += node + '/';
+
+        // unique
+        let get_child = function (node, name) {
+          if ('children' in node) {
+            for (let index = 0; index < node.children.length; index++) {
+              const c = node.children[index];
+              if (c.name == name) {
+                return c;
+              }
+            }
+          }
+          return null;
+        };
+        let ptr = get_child(node_ptr, node);
+        if (ptr != null) {
+          node_ptr = ptr;
+          continue;
+        }
+
+
+        // construct
+        let child = {};
+        child.name = node;
+        child.parent_path = parent_path;
+        child.path = node_path;
+        child.fold = true;
+        child.children = [];
+
+        // append
+        node_ptr.children ??= [];
+        node_ptr.children.push(child);
+        node_ptr = child;
+      }
+      // process file
+      {
+        const node = node_arr[node_arr.length - 1];
+
+        let parent_path = node_path;
+        node_path += node;
+
+        // construct
+        let child = {};
+        child.name = node;
+        child.parent_path = parent_path;
+        child.path = node_path;
+        child.fold = false;
+        child.type = node.split('.').slice(-1)[0];
+        child.date = date;
+        child.size = size;
+
+        // append
+        node_ptr.children ??= [];
+        node_ptr.children.push(child);
+        node_ptr = child;
+      }
+    }
+    return tree;
+  }
+  /**
    * 獲取圖片的名稱和上傳日期
    * @param {String} xmlLink 需要解析的騰訊云COS桶XML鏈接
    * @param {Object} cosAlbum CosAlbum.prototype
-   * @return {Array} content 包含名稱和日期的二維數組，content[x][0]為單個相冊名稱
+   * @return {Object} album_tree 包含名稱和日期、大小的相册树
    */
   var _getContent = function (cosAlbum, xmlLink) {
     cosAlbum.xmlDoc = _loadXMLDoc(xmlLink);
-    let urls = cosAlbum.xmlDoc.querySelectorAll('Key');
-    let date = cosAlbum.xmlDoc.querySelectorAll('LastModified');
-    let photoBox = -1;
-    let photo = 0;
-    let content = new Array();
-    for (let i = 0; i < urls.length; i++) {
-      let info = urls[i].innerHTML;
-      let upDate = date[i].innerHTML.slice(0, 19).replace(/T/g, ' ');
-      let slash = info.indexOf('/');
-      if (slash === -1) {
-        //排除根目錄文件
-        continue;
+    let urls = Array.from(cosAlbum.xmlDoc.querySelectorAll('Key')).map(ele=> {return ele.innerHTML;});
+    let dates = Array.from(cosAlbum.xmlDoc.querySelectorAll('LastModified')).map(ele=> {return ele.innerHTML.slice(0, 19).replace(/T/g, ' ');});
+    let sizes = Array.from(cosAlbum.xmlDoc.querySelectorAll('Size')).map(ele=> {return parseInt(ele.innerHTML);});
+
+    for (let index = 0; index < urls.length;) {
+      const path = urls[index];
+      if (path.endsWith('/') || (cosAlbum.album_regex != '' && !RegExp(cosAlbum.album_regex).test(path)))
+      {
+        urls.splice(index, 1);
+        dates.splice(index, 1);
+        sizes.splice(index, 1);
       }
-      if (slash === info.length - 1) {
-        //相冊目錄
-        content[++photoBox] = new Array();
-        content[photoBox][0] = {
-          'url': info,
-          'date': upDate
-        };
-        photo = 1;
-      } else {
-        //相冊圖片
-        content[photoBox][photo++] = {
-          'url': info.slice(slash + 1),
-          'date': upDate
-        };
+      else
+      {
+        index++;
       }
     }
-    return content;
+
+    let album_tree = make_album_tree(urls, dates, sizes);
+    console.log(album_tree);
+    return album_tree;
   };
   /**
    * 加載XML
@@ -307,6 +382,7 @@ Cosalbum = function Cosalbum() {
    * Cosalbum 基於騰訊云COS桶的“動態”相冊
    * @param {Object} option 
    * @param {String} option.xmlLink 需要解析的騰訊云COS桶XML鏈接
+   * @param {Array} option.album_regex 添加到相册的路径
    * @param {String} [option.prependTo='body'] 可選解析相冊到某個節點,e.g. '.myalbum','#myalbum'
    * @param {Number} [option.viewNum=4] 每個相冊顯示的照片數目
    * @param {String} [option.copyUrl] 複製圖片/音視頻的 CDN 链接
@@ -321,6 +397,7 @@ Cosalbum = function Cosalbum() {
     this.version = '1.1.6';
     this.option = option || {};
     this.xmlLink = this.option.xmlLink || '';
+    this.album_regex = this.option.album_regex || '';
     this.prependTo = this.option.prependTo || 'body';
     this.viewNum = this.option.viewNum || 4;
     this.copyUrl = this.option.copyUrl || window.location.href;
@@ -333,6 +410,15 @@ Cosalbum = function Cosalbum() {
       $copyNode.setAttribute('readonly', 'readonly');
       document.body.appendChild($copyNode);
     }
+
+    // for (let index = 0; index < this.album_paths.length; index++) {
+    //   path = this.album_paths[index];
+    //   if (path.endsWith('/'))
+    //   {
+    //     this.album_paths[index] = path.slice(0, -1);
+    //   }
+    // }
+
     _renderDom(this);
     _createPowerEle(this.version);
   }
