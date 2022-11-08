@@ -59,13 +59,13 @@
   font-weight: bold;
   font-size: 1rem;
 }
-.photo>span:last-child{
+.photo>.upload-desc{
   font-weight: 500;
   font-size: 0.8rem;
   font-style: italic;
   color: #999;
 }
-.photo>span:last-child::before{
+.photo>.upload-desc::before{
   content: 'Uploaded';
   margin-right: 0.25rem;
 }
