@@ -96,84 +96,66 @@ Cosalbum = function Cosalbum() {
   * @return {Object} tree 存储相册树形结构的对象
   */
   function make_album_tree(urls, dates, sizes) {
-    let tree = {};
-    for (let index = 0; index < urls.length; index++) {
-      const path = urls[index];
-      const date = dates[index];
-      const size = sizes[index];
 
-      if (path.endsWith('/'))
-        continue;
-      let node_ptr = tree;
-      let node_path = '';
-      let node_arr = path.split('/').filter(item => item.trim() != '');
-
-      // process fold
-      for (let node_index = 0; node_index < node_arr.length - 1; node_index++) {
-        const node = node_arr[node_index];
-
-        let parent_path = node_path;
-        node_path += node + '/';
-
-        // unique
-        let get_child = function (node, name) {
-          if ('children' in node) {
-            for (let index = 0; index < node.children.length; index++) {
-              const c = node.children[index];
-              if (c.name == name) {
-                return c;
-              }
-            }
-          }
-          return null;
-        };
-        let ptr = get_child(node_ptr, node);
-        if (ptr != null) {
-          node_ptr = ptr;
-          continue;
+    let make_node = (name, parent, path, fold, date, size) => {
+        let node = {};
+        node.name = name;
+        node.parent = parent;
+        node.path = path;
+        node.fold = fold;
+        node.type = fold ? null : name.split('.').slice(-1)[0];
+        node.children = fold ? [] : null;
+        node.date = date;
+        node.size = parseInt(size);
+        node.is_root = () => { return (node.parent?.parent??null) == null; };
+        node.get_child = (child_name) => {
+            let child = node?.children?.find(n => n.name == child_name)??null;
+            return child;
         }
 
+        if (parent != null) {
+            parent?.children?.push(node);
+        }
+        return node;
+    };
 
-        // construct
-        let child = {};
-        child.name = node;
-        child.parent_path = parent_path;
-        child.parent = node_ptr;
-        child.path = node_path;
-        child.fold = true;
-        child.children = [];
+    let tree = make_node('', null, '', true, null, 0);
 
-        // append
-        node_ptr.children ??= [];
-        node_ptr.children.push(child);
-        node_ptr = child;
-      }
-      // process file
-      {
-        const node = node_arr[node_arr.length - 1];
+    for (let index = 0; index < urls.length; index++) {
+        const path = urls[index];
+        const date = dates[index];
+        const size = sizes[index];
 
-        let parent_path = node_path;
-        node_path += node;
+        if (path.endsWith('/'))
+            continue;
+        let node_ptr = tree;
+        let node_path = '';
+        let node_arr = path.split('/').filter(item => item.trim() != '');
 
-        // construct
-        let child = {};
-        child.name = node;
-        child.parent_path = parent_path;
-        child.path = node_path;
-        child.parent = node_ptr;
-        child.fold = false;
-        child.type = node.split('.').slice(-1)[0];
-        child.date = date;
-        child.size = size;
+        // process fold
+        for (let node_index = 0; node_index < node_arr.length - 1; node_index++) {
+            const node_name = node_arr[node_index];
+            node_path += node_name + '/';
 
-        // append
-        node_ptr.children ??= [];
-        node_ptr.children.push(child);
-        node_ptr = child;
-      }
+            let ptr = node_ptr.get_child(node_name);
+            if (ptr != null) {
+                node_ptr = ptr;
+                continue;
+            }
+
+            // construct
+            console.log(node_ptr)
+            node_ptr = make_node(node_name, node_ptr, node_path, true, null, 0);
+        }
+        // process file
+        const file_name = node_arr[node_arr.length - 1];
+        file_path = path;
+        make_node(file_name, node_ptr, file_path, false, date, size);
     }
     return tree;
   }
+
+
   /**
    * 獲取圖片的名稱和上傳日期
    * @param {String} xmlLink 需要解析的騰訊云COS桶XML鏈接
