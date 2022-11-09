@@ -152,7 +152,7 @@ nav:
       - Ohto-Ai: https://gitstalk.netlify.app/Ohto-Ai
       - beiklive: https://gitstalk.netlify.app/beiklive
   - 分享:
-    - share/
+    - share/index.md
     - share/algorithm-visualizer.md
     - share/stashapp.md
   - Monitor: uptime-status/
