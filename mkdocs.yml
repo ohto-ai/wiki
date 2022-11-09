@@ -155,6 +155,7 @@ nav:
     - share/index.md
     - share/algorithm-visualizer.md
     - share/stashapp.md
+    - share/pose-monitor.md
   - Monitor: uptime-status/
   - 友链: friend.md
   - 关于: about.md
