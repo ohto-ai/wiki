@@ -1,7 +1,7 @@
-site_name: OhtoAi - Blog
-site_url: https://blog.ohtoai.top/
-repo_url: https://github.com/Ohto-Ai/blog
-site_description: Blog for Ohto-Ai
+site_name: OhtoAi - Wiki
+site_url: https://wiki.ohtoai.top/
+repo_url: https://github.com/Ohto-Ai/wiki
+site_description: Wiki for Ohto-Ai
 site_author: Ohto-Ai
 
 theme:
