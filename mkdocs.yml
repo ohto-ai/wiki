@@ -131,16 +131,17 @@ nav:
     - cpp/design-patterns.md
     - cpp/other-cpp-tips.md
     - cpp/rand-method.md
-    - cpp/mt19937.md
     - cpp/open-mp.md
     - cpp/branfuck.md
     - cpp/gray-code.md
     - cpp/error-code.md
-    - cpp/fowler-noll-vo-1a.md
+    - algorithm:
+      - cpp/mt19937.md
+      - cpp/fowler-noll-vo-1a.md
     - Debug:
       - cpp/dump-traceback.md
-  - UE4:
-    - ue4/ue-ufunction-macro.md
+    - UE4:
+      - ue4/ue-ufunction-macro.md
   - Tool:
     - Regex: 
       - tool/regex/learn-regex.md
