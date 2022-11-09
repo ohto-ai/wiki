@@ -135,7 +135,7 @@ nav:
     - cpp/branfuck.md
     - cpp/gray-code.md
     - cpp/error-code.md
-    - algorithm:
+    - Algorithm:
       - cpp/mt19937.md
       - cpp/fowler-noll-vo-1a.md
     - Debug:
@@ -153,6 +153,8 @@ nav:
       - beiklive: https://gitstalk.netlify.app/beiklive
   - 分享:
     - share/
+    - share/algorithm-visualizer.md
+    - share/stashapp.md
   - Monitor: uptime-status/
   - 友链: friend.md
   - 关于: about.md
