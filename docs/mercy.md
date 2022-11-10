@@ -34,8 +34,8 @@ comments: false
     </audio>
 </button>
 <button class="audio-player-button md-button md-button--primary">
-    Til Valhalla
-    <audio src="../assets/sound/overwatch/mercy/til_valhalla.mp3" preload="none">
+    Till Valhalla
+    <audio src="../assets/sound/overwatch/mercy/till_valhalla.mp3" preload="none">
     </audio>
 </button>
 <button class="audio-player-button md-button md-button--primary">
