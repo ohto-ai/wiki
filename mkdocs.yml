@@ -156,6 +156,7 @@ nav:
     - share/algorithm-visualizer.md
     - share/stashapp.md
     - share/pose-monitor.md
+  - Mercy: mercy.md
   - Monitor: uptime-status/
   - 友链: friend.md
   - 关于: about.md
