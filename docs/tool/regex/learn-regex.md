@@ -51,7 +51,7 @@ comments: true
 <br/><br/>
 
 <p align="center">
-  <img src="https://assets.ohtoai.top/img/ohtoai/regexp-cn.png" alt="Regular expression">
+  <img src="https://github.com/ziishaned/learn-regex/raw/master/img/regexp-cn.png" alt="Regular expression">
 </p>
 
 以上的正则表达式可以接受 `john_doe`、`jo-hn_doe`、`john12_as`。
