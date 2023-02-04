@@ -144,7 +144,7 @@ nav:
       - ue4/ue-ufunction-macro.md
   - Tool:
     - Regex: tool/regex/learn-regex.md
-    - Vim: tool/vim/README.md
+    - Vim: tool/vim/
     - Git: tool/git/git-guide.md
     - Github活动: 
       - gitstalk/index.md
