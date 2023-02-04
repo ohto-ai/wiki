@@ -1,0 +1,3 @@
+[submodule "docs/tool/vim"]
+	path = docs/tool/vim
+	url = git@github.com:wsdjeg/Learn-Vim_zh_cn.git

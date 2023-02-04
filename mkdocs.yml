@@ -143,10 +143,9 @@ nav:
     - UE4:
       - ue4/ue-ufunction-macro.md
   - Tool:
-    - Regex: 
-      - tool/regex/learn-regex.md
-    - Git: 
-      - tool/git/git-guide.md
+    - Regex: tool/regex/learn-regex.md
+    - Vim: tool/vim/README.md
+    - Git: tool/git/git-guide.md
     - Github活动: 
       - gitstalk/index.md
       - Ohto-Ai: https://gitstalk.netlify.app/Ohto-Ai
