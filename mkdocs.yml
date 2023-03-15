@@ -135,6 +135,7 @@ nav:
     - cpp/branfuck.md
     - cpp/gray-code.md
     - cpp/error-code.md
+    - cpp/daemon.md
     - Algorithm:
       - cpp/mt19937.md
       - cpp/fowler-noll-vo-1a.md
