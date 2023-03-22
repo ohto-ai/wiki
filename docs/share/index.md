@@ -31,6 +31,7 @@ tags: 网站, 工具, 分享
 | 链接 | 简介 |
 |-----|------|
 | [ssh-welcome-funny-command](https://dmesg.app/ssh-welcome-funny-command.html) | 草泥马 SSH 登录信息、几个好玩的 Linux 命令 |
+| [每天 60 秒读懂世界 API](https://viki.moe/60s/) | 每天 60 秒读懂世界 API |
 
 ## 在哪里
 👇👇👇
