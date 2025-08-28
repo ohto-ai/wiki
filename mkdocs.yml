@@ -147,6 +147,7 @@ nav:
     - Regex: tool/regex/learn-regex.md
     - Vim: tool/vim/
     - Git: tool/git/git-guide.md
+    - Win10: tool/win10upgrad.md
     - Github活动: 
       - gitstalk/index.md
       - Ohto-Ai: https://gitstalk.netlify.app/Ohto-Ai
