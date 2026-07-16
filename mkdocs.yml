@@ -157,6 +157,11 @@ nav:
     - share/algorithm-visualizer.md
     - share/stashapp.md
     - share/pose-monitor.md
+  - MC:
+    - GuildPlugin:
+      - mc/guildplugin/index.md
+      - mc/guildplugin/getting-started.md
+      - mc/guildplugin/commands.md
   - Mercy: mercy.md
   - Monitor: uptime-status/
   - 友链: friend.md
