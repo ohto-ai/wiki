@@ -162,6 +162,7 @@ nav:
       - mc/guildplugin/index.md
       - mc/guildplugin/getting-started.md
       - mc/guildplugin/commands.md
+    - OpShop: mc/opshop/index.md
   - Mercy: mercy.md
   - Monitor: uptime-status/
   - 友链: friend.md
