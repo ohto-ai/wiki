@@ -30,7 +30,7 @@
 /scoreboard objectives add totalKills totalKillCount "总击杀"
 
 # 承受伤害（单位：半颗心，1 伤害 = 半颗心）
-/scoreboard objectives add damageTaken minecraft.custom:minecraft:damage_taken "承受伤害"
+/scoreboard objectives add damageTaken minecraft.custom:minecraft.damage_taken "承受伤害"
 ```
 
 ### 1.2 自定义辅助目标（用于团队统计和 KD 计算）
