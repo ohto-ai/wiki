@@ -148,7 +148,7 @@
 
 初值未设置时视为 0，首次运行会把全部历史数据一次性计入团队。
 
-### 完整命令方块链
+### 方案 A：命令方块链
 
 共 **29 个命令方块**（1 脉冲 + 28 链），覆盖 4 项统计 × 2 个队伍 + KD 计算。
 
@@ -213,6 +213,103 @@
 - **漏斗时钟**（5 秒以上间隔）
 - **观察者时钟**（配合红石）
 - **循环命令方块 + `/schedule`**（无需物理方块，需配合数据包函数使用）
+
+---
+
+### 方案 B：数据包函数（推荐）
+
+如果你有数据包权限，把全部命令写进一个 `.mcfunction` 文件比摆 29 个方块简单得多。
+
+#### 目录结构
+
+在存档的 `datapacks/` 下创建：
+
+```
+datapacks/kd/
+├── pack.mcmeta
+└── data/
+    └── kd/
+        └── function/
+            └── sync.mcfunction
+```
+
+#### pack.mcmeta
+
+```json
+{
+  "pack": {
+    "pack_format": 41,
+    "description": "KD Scoreboard Sync"
+  }
+}
+```
+
+> `pack_format`：1.20.5/1.20.6 = **41**。其他版本参考 [Minecraft Wiki](https://minecraft.wiki/w/Data_pack#Pack_format)。
+
+#### sync.mcfunction
+
+直接把方案 A 的 28 条命令（② ~ ㉙）复制进去，去掉序号即可：
+
+```mcfunction
+# === 红队 ===
+execute as @a[team=Red] run scoreboard players operation RedTeam teamKills += @s playerKills
+execute as @a[team=Red] run scoreboard players operation RedTeam teamKills -= @s lastKillSync
+execute as @a[team=Red] run scoreboard players operation @s lastKillSync = @s playerKills
+execute as @a[team=Red] run scoreboard players operation RedTeam teamDeaths += @s deaths
+execute as @a[team=Red] run scoreboard players operation RedTeam teamDeaths -= @s lastDeathSync
+execute as @a[team=Red] run scoreboard players operation @s lastDeathSync = @s deaths
+execute as @a[team=Red] run scoreboard players operation RedTeam teamDamageDealt += @s damageDealt
+execute as @a[team=Red] run scoreboard players operation RedTeam teamDamageDealt -= @s lastDmgDealtSync
+execute as @a[team=Red] run scoreboard players operation @s lastDmgDealtSync = @s damageDealt
+execute as @a[team=Red] run scoreboard players operation RedTeam teamDamageTaken += @s damageTaken
+execute as @a[team=Red] run scoreboard players operation RedTeam teamDamageTaken -= @s lastDmgTakenSync
+execute as @a[team=Red] run scoreboard players operation @s lastDmgTakenSync = @s damageTaken
+
+# === 蓝队 ===
+execute as @a[team=Blue] run scoreboard players operation BlueTeam teamKills += @s playerKills
+execute as @a[team=Blue] run scoreboard players operation BlueTeam teamKills -= @s lastKillSync
+execute as @a[team=Blue] run scoreboard players operation @s lastKillSync = @s playerKills
+execute as @a[team=Blue] run scoreboard players operation BlueTeam teamDeaths += @s deaths
+execute as @a[team=Blue] run scoreboard players operation BlueTeam teamDeaths -= @s lastDeathSync
+execute as @a[team=Blue] run scoreboard players operation @s lastDeathSync = @s deaths
+execute as @a[team=Blue] run scoreboard players operation BlueTeam teamDamageDealt += @s damageDealt
+execute as @a[team=Blue] run scoreboard players operation BlueTeam teamDamageDealt -= @s lastDmgDealtSync
+execute as @a[team=Blue] run scoreboard players operation @s lastDmgDealtSync = @s damageDealt
+execute as @a[team=Blue] run scoreboard players operation BlueTeam teamDamageTaken += @s damageTaken
+execute as @a[team=Blue] run scoreboard players operation BlueTeam teamDamageTaken -= @s lastDmgTakenSync
+execute as @a[team=Blue] run scoreboard players operation @s lastDmgTakenSync = @s damageTaken
+
+# === KD 计算 ===
+execute as @a[scores={deaths=0}] run scoreboard players set @s deaths 1
+execute as @a run scoreboard players operation @s kdRatio = @s playerKills
+execute as @a run scoreboard players operation @s kdRatio *= #100 const100
+execute as @a run scoreboard players operation @s kdRatio /= @s deaths
+```
+
+#### 触发方式
+
+```mcfunction
+# 方式一：手动触发一次
+/function kd:sync
+
+# 方式二：循环命令方块 + schedule 自调度（推荐）
+# 在 sync.mcfunction 末尾加一行：
+schedule function kd:sync 5s
+
+# 然后手动执行一次 /function kd:sync 即可启动循环
+```
+
+不需要红石时钟，不需要摆命令方块。`/reload` 即可热更新函数内容。
+
+### 方案对比
+
+| | 方案 A：命令方块链 | 方案 B：数据包函数 |
+|:---|:---|:---|
+| 搭建难度 | 摆 29 个方块 + 逐个贴命令 | 创建 3 个文件 |
+| 修改维护 | 逐方块点开编辑 | 编辑 `.mcfunction` 后 `/reload` |
+| 依赖 | 红石时钟 | `/schedule`（无物理方块） |
+| 适用场景 | 纯生存 / 无管理员权限 | 有数据包/管理员权限 |
+| 性能 | 每 tick 检查方块 | 直接执行，更轻量 |
 
 ---
 
