@@ -52,42 +52,44 @@
 
 ### 2.1 创建队伍
 
+> ⚠️ 1.20.5+ 中 `/scoreboard teams` 已拆分为独立命令 `/team`。
+
 ```mcfunction
 # 创建红队和蓝队
-/scoreboard teams add Red "红队"
-/scoreboard teams add Blue "蓝队"
+/team add Red "红队"
+/team add Blue "蓝队"
 ```
 
 ### 2.2 将玩家加入队伍
 
 ```mcfunction
 # 将指定玩家加入红队（替换 玩家名 为实际 ID）
-/scoreboard teams join Red 玩家名
+/team join Red 玩家名
 
 # 将指定玩家加入蓝队
-/scoreboard teams join Blue 玩家名
+/team join Blue 玩家名
 
 # 批量加入示例
-/scoreboard teams join Red Alice
-/scoreboard teams join Red Bob
-/scoreboard teams join Blue Charlie
-/scoreboard teams join Blue David
+/team join Red Alice
+/team join Red Bob
+/team join Blue Charlie
+/team join Blue David
 ```
 
 ### 2.3 队伍管理命令
 
 ```mcfunction
 # 查看所有队伍
-/scoreboard teams list
+/team list
 
 # 查看队伍成员
-/scoreboard teams list Red
+/team list Red
 
 # 将玩家移出队伍
-/scoreboard teams leave 玩家名
+/team leave 玩家名
 
 # 删除队伍
-/scoreboard teams remove Red
+/team remove Red
 ```
 
 ---
@@ -132,99 +134,136 @@
 
 ## 五、命令方块布置方案
 
-### 5.1 方案一：增量同步方案（推荐）
+### 核心原理
 
-此方案不会重复累加，数字精确。
+`playerKillCount` 和 `deathCount` 是**游戏统计自动维护**的只读分数——玩家每杀一人/死一次，对应分数自动 +1，**无法被 `/scoreboard players reset` 真正清零**（reset 后下次同步会恢复原值）。因此"累加后重置"的方案行不通。
 
-#### 命令方块布置图
+正确做法是用虚拟分数 `lastSync` 记录「上次已同步的击杀数」，每次只把**增量**（当前值 - 上次同步值）加到团队总分：
 
 ```
-[红石时钟] → [脉冲①] → [链②] → [链③] → [链④] → [链⑤]
+本次增量 = playerKills - lastSync
+团队总分 += 本次增量
+lastSync = playerKills（更新为当前值）
 ```
-
-| 顺序 | 方块类型      | 命令                                                                                               |
-| :--: | :------------ | :------------------------------------------------------------------------------------------------- |
-|  ①  | 脉冲 + 需红石 | 触发整个链（由时钟控制）                                                                           |
-|  ②  | 链 + 有条件   | `execute as @a[team=Red] run scoreboard players operation RedTeam teamKills += @s playerKills`   |
-|  ③  | 链 + 有条件   | `execute as @a[team=Blue] run scoreboard players operation BlueTeam teamKills += @s playerKills` |
-|  ④  | 链 + 有条件   | `execute as @a[team=Red] run scoreboard players operation @s lastSync = @s playerKills`          |
-|  ⑤  | 链 + 有条件   | `execute as @a[team=Blue] run scoreboard players operation @s lastSync = @s playerKills`         |
-
-> ⚠️ **问题**：此方案仍然会重复累加，因为每次触发都会把 `playerKills` 的全部值加一遍。要实现真正的增量，需要用更复杂的比较逻辑。如果觉得麻烦，推荐直接使用下面的**方案二（定期重置）**。
 
 ---
 
-### 5.2 方案二：定期重置方案（简单实用，推荐）
+### 5.1 方案一：增量同步（推荐）
 
-**原理**：每隔一段时间，将所有玩家的 `playerKills` 累加到团队后，**重置所有人的 `playerKills` 为 0**，开始新一轮统计。
+不丢数据，不重复累加，适合长期统计。
 
 #### 命令方块布置图
 
 ```
-[红石时钟] → [脉冲①] → [链②] → [链③] → [链④] → [链⑤] → [链⑥]
+[红石时钟] → [脉冲①] → [链②] → [链③] → [链④] → [链⑤] → [链⑥] → [链⑦]
 ```
 
-| 顺序 | 方块类型      | 命令                                                                                                          |
-| :--: | :------------ | :------------------------------------------------------------------------------------------------------------ |
-|  ①  | 脉冲 + 需红石 | 触发整个链（由时钟控制）                                                                                      |
-|  ②  | 链 + 有条件   | `scoreboard players operation RedTeam teamKills += @a[team=Red] playerKills`                                |
-|  ③  | 链 + 有条件   | `scoreboard players operation BlueTeam teamKills += @a[team=Blue] playerKills`                              |
-|  ④  | 链 + 有条件   | `scoreboard players reset @a[team=Red] playerKills`                                                         |
-|  ⑤  | 链 + 有条件   | `scoreboard players reset @a[team=Blue] playerKills`                                                        |
-|  ⑥  | 链 + 有条件   | `scoreboard players reset @a[team=Red] lastSyncscoreboard players reset @a[team=Blue] lastSync`（如有使用） |
+| 顺序 | 方块类型      | 命令                                                                                                    | 说明               |
+| :--: | :------------ | :------------------------------------------------------------------------------------------------------ | :----------------- |
+|  ①  | 脉冲 + 需红石 | 触发整个链                                                                                              | 由红石时钟控制     |
+|  ②  | 链 + 无条件   | `execute as @a[team=Red] run scoreboard players operation RedTeam teamKills += @s playerKills`        | 加当前击杀         |
+|  ③  | 链 + 无条件   | `execute as @a[team=Red] run scoreboard players operation RedTeam teamKills -= @s lastSync`           | 减上次同步 = 增量  |
+|  ④  | 链 + 无条件   | `execute as @a[team=Red] run scoreboard players operation @s lastSync = @s playerKills`               | 更新同步值         |
+|  ⑤  | 链 + 无条件   | `execute as @a[team=Blue] run scoreboard players operation BlueTeam teamKills += @s playerKills`      | 蓝队加当前击杀     |
+|  ⑥  | 链 + 无条件   | `execute as @a[team=Blue] run scoreboard players operation BlueTeam teamKills -= @s lastSync`         | 蓝队减上次同步     |
+|  ⑦  | 链 + 无条件   | `execute as @a[team=Blue] run scoreboard players operation @s lastSync = @s playerKills`              | 蓝队更新同步值     |
 
-#### 红石时钟说明
+> ✅ 初值 `lastSync` 为 0（未设置过），初次运行时增量 = `playerKills - 0` = 全部击杀，之后每轮只加新增部分。
 
-推荐使用以下方式触发脉冲命令方块：
+---
+
+### 5.2 方案二：增量同步 + KD 计算（完整链）
+
+在方案一的基础上，追加个人 KD 计算。**KD 用百分制显示**（先 ×100 再 ÷死亡），避免整数除法全部显示为 0。
+
+#### 前置准备
+
+```mcfunction
+# 创建一个常数 100 的虚拟分数，用于 KD 精度乘法
+/scoreboard objectives add const100 dummy
+/scoreboard players set #100 const100 100
+```
+
+#### 命令方块布置图
+
+```
+[红石时钟] → [脉冲①] → [链②] ... [链⑦]（同方案一）→ [链⑧] → [链⑨] → [链⑩] → [链⑪]
+```
+
+| 顺序 | 方块类型      | 命令                                                                                             | 说明              |
+| :--: | :------------ | :----------------------------------------------------------------------------------------------- | :---------------- |
+|  ①  | 脉冲 + 需红石 | 触发整个链                                                                                       |                   |
+|  ②~⑦ | 同方案一     | 团队增量同步                                                                                     |                   |
+|  ⑧  | 链 + 无条件   | `execute as @a[scores={deaths=0}] run scoreboard players set @s deaths 1`                       | 防除零（先处理）  |
+|  ⑨  | 链 + 无条件   | `execute as @a run scoreboard players operation @s kdRatio = @s playerKills`                    | KD = 击杀         |
+|  ⑩  | 链 + 无条件   | `execute as @a run scoreboard players operation @s kdRatio *= #100 const100`                    | KD = 击杀 × 100   |
+|  ⑪  | 链 + 无条件   | `execute as @a run scoreboard players operation @s kdRatio /= @s deaths`                        | KD = 击杀×100 ÷ 死亡 |
+
+> 📊 **阅读 KD**：显示 166 = KD 1.66，显示 40 = KD 0.40。可以修改 `#100 const100` 为 1000 获得更高精度。
+
+---
+
+### 5.3 为什么不用「累加后重置」方案
+
+| 计分板目标     | 准则                 | 可 reset 清零？ | 原因                   |
+| :------------- | :------------------- | :-------------: | :--------------------- |
+| `playerKills`  | `playerKillCount`    |       ❌        | 游戏统计自动维护，秒回 |
+| `deaths`       | `deathCount`         |       ❌        | 同上                   |
+| `teamKills`    | `dummy`              |       ✅        | 纯虚拟，可任意修改     |
+| `kdRatio`      | `dummy`              |       ✅        | 同上                   |
+| `lastSync`     | `dummy`              |       ✅        | 同上                   |
+
+只有 `dummy` 准则的分数能真正被 reset。`playerKillCount` / `deathCount` 是游戏引擎维护的只读数据——`reset` 只是暂时抹掉显示，下一次计分板同步时值会立刻恢复。因此依赖 reset 的方案对这类准则是无效的。
+
+---
+
+### 红石时钟说明
+
+推荐以下方式触发脉冲命令方块：
 
 - **漏斗时钟**（5 秒以上间隔）
 - **观察者时钟**（配合红石）
-- **循环命令方块 + 延时**（用 `schedule` 命令）
+- **循环命令方块 + `/schedule`**（无需物理方块，最干净）
 
----
-
-### 5.3 方案三：完整版命令方块链（含 KD 计算）
-
-如果你想一次性完成 **团队累加 + 重置 + KD 计算**，使用以下完整链：
-
+```mcfunction
+# 放在循环命令方块中，每 5 秒自调度一次
+schedule function <本函数> 5s
 ```
-[红石时钟] → [脉冲①] → [链②] → [链③] → [链④] → [链⑤] → [链⑥] → [链⑦] → [链⑧]
-```
-
-| 顺序 | 方块类型      | 命令                                                                                              |
-| :--: | :------------ | :------------------------------------------------------------------------------------------------ |
-|  ①  | 脉冲 + 需红石 | 触发整个链                                                                                        |
-|  ②  | 链 + 有条件   | `scoreboard players operation RedTeam teamKills += @a[team=Red] playerKills`                    |
-|  ③  | 链 + 有条件   | `scoreboard players operation BlueTeam teamKills += @a[team=Blue] playerKills`                  |
-|  ④  | 链 + 有条件   | `scoreboard players reset @a[team=Red] playerKills`                                             |
-|  ⑤  | 链 + 有条件   | `scoreboard players reset @a[team=Blue] playerKills`                                            |
-|  ⑥  | 链 + 有条件   | `execute as @a run scoreboard players operation @s kdRatio = @s playerKills`                    |
-|  ⑦  | 链 + 有条件   | `execute as @a run scoreboard players operation @s kdRatio /= @s deaths`                        |
-|  ⑧  | 链 + 有条件   | `scoreboard players reset @a[team=Red] lastSyncscoreboard players reset @a[team=Blue] lastSync` |
-
-> ⚠️ **KD 计算注意**：如果玩家的 `deaths` 为 0，除法会报错。建议先用条件判断或给每个玩家的死亡数 +1 再计算。
 
 ---
 
 ## 六、个人 KD 比率计算
 
-### 6.1 整数 KD（聊天栏执行或命令方块）
+### 6.1 百分制 KD（推荐）
+
+Minecraft 计分板只存整数，5 杀 ÷ 3 死 = 1（不是 1.67），2 杀 ÷ 5 死 = 0。先乘 100 再除，把结果放大后阅读：
 
 ```mcfunction
-# 对每个玩家计算 KD = 击杀 ÷ 死亡（整数商）
+# 创建常数
+/scoreboard objectives add const100 dummy
+/scoreboard players set #100 const100 100
+
+# 对每个玩家计算 KD（百分制）
 execute as @a run scoreboard players operation @s kdRatio = @s playerKills
+execute as @a run scoreboard players operation @s kdRatio *= #100 const100
 execute as @a run scoreboard players operation @s kdRatio /= @s deaths
 ```
+
+- 显示 **166** → KD 1.66
+- 显示 **40** → KD 0.40
+- 显示 **250** → KD 2.50
 
 ### 6.2 避免除以零
 
 ```mcfunction
-# 方法一：给所有玩家的 deaths 先 +1（聊天栏执行一次）
-execute as @a run scoreboard players add @s deaths 1
-
-# 方法二：在计算前用条件判断（命令方块链中）
+# 方法一：计算前把 deaths=0 的玩家设为 1（推荐）
 execute as @a[scores={deaths=0}] run scoreboard players set @s deaths 1
+
+# 方法二：全员 +1（会让 KD 整体偏低，不推荐）
+# execute as @a run scoreboard players add @s deaths 1
 ```
+
+> ⚠️ 方法二会导致每人死亡数虚高 1，KD 整体偏低，尤其在死亡数少时偏差很大。
 
 ### 6.3 显示 KD
 
@@ -273,27 +312,28 @@ scoreboard players list BlueTeam
 
 ### 8.1 关于 `reset` 命令的重要说明
 
-| 命令                                        | 影响范围                         | 是否影响统计面板 |
-| :------------------------------------------ | :------------------------------- | :--------------: |
-| `scoreboard players reset @s playerKills` | 仅计分板上的`playerKills` 分数 |    ❌ 不影响    |
-| `scoreboard players reset @s deaths`      | 仅计分板上的`deaths` 分数      |    ❌ 不影响    |
-| `scoreboard players reset @s`             | 玩家所有计分板分数               |    ❌ 不影响    |
+| 准则类型 | 示例 | reset 效果 |
+| :------- | :--- | :--------- |
+| 游戏统计准则 | `playerKillCount`、`deathCount` | 暂时清空显示，下次同步立即恢复原值 ❌ |
+| 虚拟准则 | `dummy`（如 `teamKills`、`kdRatio`、`lastSync`） | 真正删除分数，可重新设置 ✅ |
 
-> ✅ **统计面板**（按 ESC → 统计信息）中的击杀、死亡等原始数据，**无法通过任何 `/scoreboard` 命令修改**。重置计分板分数只影响屏幕显示，不影响底层统计。
+> ✅ **统计面板**（按 ESC → 统计信息）中的击杀、死亡等原始数据，**无法通过任何 `/scoreboard` 命令修改**。
 
-### 8.2 团队累加方案选择
+### 8.2 正确方案总结
 
-| 方案               | 优点             | 缺点                     |
-| :----------------- | :--------------- | :----------------------- |
-| **增量同步** | 数据实时、精确   | 命令复杂，需要额外计分板 |
-| **定期重置** | 命令简单，易实现 | 数据周期清零，非实时累计 |
-| **手动触发** | 可控性强         | 需要人工操作             |
+| 方案               | 原理                       | 是否推荐     |
+| :----------------- | :------------------------- | :----------: |
+| **增量同步** | 每次只加增量（当前 - 上次同步） | ✅ 推荐      |
+| **累加后重置** | 累加后 reset `playerKills` | ❌ 无效      |
+
+`playerKillCount` 是游戏引擎维护的只读数据，reset 后下次同步值会立刻恢复。所以累加后无法真正清零，必须用增量同步。
 
 ### 8.3 命令方块设置
 
 - **脉冲命令方块**：需要红石信号触发
-- **链命令方块**：必须设置为"有条件"，并确保箭头指向正确
-- **所有链命令方块**：需要设置在脉冲命令方块的正后方（箭头方向一致）
+- **链命令方块**：设为**无条件**，防止某队无人在线时链条断裂
+- **所有链命令方块**：箭头指向同一方向，排在脉冲命令方块正后方
+- **虚拟分数初始化**：`RedTeam`、`BlueTeam`、`#100` 等虚拟分数的初值需要在聊天栏手动设好
 
 ### 8.4 性能建议
 
@@ -315,22 +355,24 @@ scoreboard players list BlueTeam
 /scoreboard objectives add teamKills dummy "团队总击杀"
 /scoreboard objectives add kdRatio dummy "KD比率"
 /scoreboard objectives add lastSync dummy "上次同步值"
+/scoreboard objectives add const100 dummy
+/scoreboard players set #100 const100 100
 
-# 创建队伍
-/scoreboard teams add Red "红队"
-/scoreboard teams add Blue "蓝队"
+# 创建队伍（1.20.5+）
+/team add Red "红队"
+/team add Blue "蓝队"
 
 # 显示计分板
-/scoreboard objectives setdisplay sidebar playerKills
+/scoreboard objectives setdisplay sidebar teamKills
 ```
 
 ### 加入玩家示例
 
 ```mcfunction
-/scoreboard teams join Red Alice
-/scoreboard teams join Red Bob
-/scoreboard teams join Blue Charlie
-/scoreboard teams join Blue David
+/team join Red Alice
+/team join Red Bob
+/team join Blue Charlie
+/team join Blue David
 ```
 
 ---
