@@ -229,7 +229,7 @@ datapacks/kd/
 ├── pack.mcmeta
 └── data/
     └── kd/
-        └── function/
+        └── functions/
             └── sync.mcfunction
 ```
 
